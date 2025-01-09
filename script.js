@@ -1,5 +1,21 @@
 //HTML Elements
 const cart = document.getElementById("cart-products");
+const subTotal=document.getElementById("sub-total");
+const total=document.getElementById("total");
+
+// Function to format the price with commas (e.g. ₹. 250000 -> ₹. 250,000)
+const formatPrice = (price) => {
+    return `₹ ${new Intl.NumberFormat().format(price)}.00`;
+  };
+const cartValue=()=>{
+    const cartData=JSON.parse(localStorage.getItem("CartData"));
+    const items=cartData.items;
+    const value=items.reduce((prev,{presentment_price,quantity})=>prev+=presentment_price*quantity,0);
+    const price=formatPrice(value);
+    subTotal.textContent=price;
+    total.textContent=price;
+  }
+
 // Function to handle the deletion of a product from the cart
 const deleteProduct = (productId) => {
   // Remove the product from the DOM
@@ -54,10 +70,6 @@ const setData = () => {
   // Check if there are items in the cart
   if (items?.length > 0) {
     // Loop through the items and generate HTML elements for each product
-    // Function to format the price with commas (e.g. Rs. 250000 -> Rs. 250,000)
-const formatPrice = (price) => {
-    return `Rs. ${new Intl.NumberFormat().format(price)}.00`;
-  };
     items.forEach(
       ({
         id,
@@ -102,6 +114,7 @@ const formatPrice = (price) => {
         newProductQuantityInput.min = min;
         newProductQuantityInput.step = increment;
         newProductQuantityInput.value = quantity;
+        newProductQuantityInput.autofocus=true;
         newProductQuantityInput.addEventListener("change", (e) => {
           changeHandler({ id, action: "update", value: e.target.value });
         });
@@ -131,6 +144,7 @@ const formatPrice = (price) => {
         cart.appendChild(newListProduct);
       }
     );
+    cartValue();
   } else {
     // If there are no items in the cart, display a message
     cart.innerHTML = "";
@@ -138,6 +152,7 @@ const formatPrice = (price) => {
     emptyMessage.textContent = "Your cart is empty.";
     emptyMessage.className = "empty-cart-message";
     cart.appendChild(emptyMessage);
+    cartValue();
   }
 };
 
@@ -164,3 +179,4 @@ const getData = async () => {
 };
 // Initialize the cart data when the page loads
 getData();
+
