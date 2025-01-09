@@ -172,7 +172,6 @@ const setData = () => {
     cartValue();
   }
 };
-console.log(body)
 const getData = async () => {
   try {
     // Check if cart data is available in localStorage
