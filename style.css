@@ -13,8 +13,12 @@ html,
   --text-color:#9F9F9F;
   --secondary-color:#B88E2F;
 }
+.container{
+  position: relative;
+}
 
 body {
+  overflow-y: hidden;
   height: 100%;
   width: 100%;
   margin: 0;
@@ -297,6 +301,59 @@ font-weight: bold;
   margin-top: 5px;
   color: #666;
   font-weight: normal;
+}
+ /* Loader Container */
+ .loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  overflow-y: hidden;
+}
+
+/* Loader Animation */
+.loader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80px;
+  height: 20px;
+}
+
+.loader div {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  animation: bounce 1.5s infinite ease-in-out;
+}
+
+.loader div:nth-child(1) {
+  background-color: #B88E2F;
+  animation-delay: -0.3s;
+}
+
+.loader div:nth-child(2) {
+  background-color: #F9F1E7;
+  animation-delay: -0.15s;
+}
+
+.loader div:nth-child(3) {
+  background-color: #FFFFFF;
+}
+
+/* Keyframes for bounce animation */
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
 }
 /* Responsive Design */
 @media (max-width: 1024px) {

@@ -1,6 +1,8 @@
 //HTML Elements
 const cart = document.getElementById("cart-products");
 const subTotal = document.getElementById("sub-total");
+const loaderContainer=document.querySelector(".loader-container");
+const body=document.querySelector("body");
 const total = document.getElementById("total");
 
 // Function to format the price with commas (e.g. ₹. 250000 -> ₹. 250,000)
@@ -170,7 +172,7 @@ const setData = () => {
     cartValue();
   }
 };
-
+console.log(body)
 const getData = async () => {
   try {
     // Check if cart data is available in localStorage
@@ -183,8 +185,13 @@ const getData = async () => {
       // If no cart data exists, save the fetched data to localStorage and render it
       localStorage.setItem("CartData", JSON.stringify(data));
       setData();
+      loaderContainer.style.display="none";
+      body.style.overflowY="scroll";
+     
     } else {
       // If cart data exists, simply render it
+      loaderContainer.style.display="none";
+      body.style.overflowY="scroll";
       setData();
     }
   } catch (e) {
