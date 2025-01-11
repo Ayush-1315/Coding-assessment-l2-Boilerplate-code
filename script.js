@@ -175,7 +175,8 @@ const setData = () => {
 const getData = async () => {
   try {
     // Check if cart data is available in localStorage
-    if (localStorage.getItem("CartData") === null) {
+    console.log();
+    if (localStorage.getItem("CartData") === null || JSON.parse(localStorage.getItem("CartData")).items.length===0) {
       // Fetch the cart data from the API
       const APIdata = await fetch(
         "https://cdn.shopify.com/s/files/1/0883/2188/4479/files/apiCartData.json?v=1728384889"
@@ -187,7 +188,8 @@ const getData = async () => {
       loaderContainer.style.display="none";
       body.style.overflowY="scroll";
      
-    } else {
+    } 
+else {
       // If cart data exists, simply render it
       loaderContainer.style.display="none";
       body.style.overflowY="scroll";
